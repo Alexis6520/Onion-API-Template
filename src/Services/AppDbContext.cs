@@ -1,0 +1,23 @@
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace Services
+{
+    /// <summary>
+    /// Servicio de base de datos
+    /// </summary>
+    public abstract class AppDbContext : DbContext
+    {
+        public DbSet<Donut> Donuts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var contextType = GetType();
+            var configNamespace = $"{contextType.Namespace}.Configuration";
+
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                contextType.Assembly,
+                configType => configType.Namespace == configNamespace);
+        }
+    }
+}
