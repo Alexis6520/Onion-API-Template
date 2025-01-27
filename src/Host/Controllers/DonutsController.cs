@@ -1,4 +1,6 @@
 ﻿using Application.Commands.Donuts;
+using Application.Models.Donuts;
+using Application.Queries;
 using Application.Queries.Donuts;
 using Host.Abstractions;
 using MediatR;
@@ -26,6 +28,13 @@ namespace Host.Controllers
             };
 
             var result = await Mediator.Send(query);
+            return BuildResponse(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await Mediator.Send(new FindQuery<int, DonutDTO>(id));
             return BuildResponse(result);
         }
     }
