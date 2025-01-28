@@ -1,7 +1,9 @@
-﻿using Application.Commands.Donuts;
+﻿using Application.Commands;
+using Application.Commands.Donuts;
 using Application.Models.Donuts;
 using Application.Queries;
 using Application.Queries.Donuts;
+using Domain.Entities;
 using Host.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +46,14 @@ namespace Host.Controllers
         {
             command.Id = id;
             var result = await Mediator.Send(command);
+            return BuildResponse(result);
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await Mediator.Send(new DeleteCommand<int, Donut>(id));
             return BuildResponse(result);
         }
     }
