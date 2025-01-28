@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace Application.Commands.Donuts
 {
+    /// <summary>
+    /// Comando para actualizar dona
+    /// </summary>
     public class UpdateDonutCommand : IRequest
     {
         [JsonIgnore]

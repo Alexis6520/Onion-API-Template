@@ -9,6 +9,10 @@ using System.Net;
 
 namespace Application.Handlers.Donuts
 {
+    /// <summary>
+    /// Manejador de consultas de dona
+    /// </summary>
+    /// <param name="dbContext">Servicio de base de datos</param>
     public class DonutQueryHandler(AppDbContext dbContext) :
         IRequestHandler<DonutsListQuery, List<DonutListItem>>,
         IRequestHandler<FindQuery<int, DonutDTO>, DonutDTO>

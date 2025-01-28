@@ -6,6 +6,10 @@ using System.Net;
 
 namespace Application.Handlers.Donuts
 {
+    /// <summary>
+    /// Manjador de actualización de dona
+    /// </summary>
+    /// <param name="dbContext">Servicio de base de datos</param>
     public class UpdateDonutHandler(AppDbContext dbContext) : IRequestHandler<UpdateDonutCommand>
     {
         private readonly AppDbContext _dbContext = dbContext;
