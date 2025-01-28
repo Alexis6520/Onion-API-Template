@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions;
 using Application.Commands.Donuts;
 using Application.Models;
+using Microsoft.Extensions.Logging;
 using Services;
 using System.Net;
 
@@ -10,9 +11,10 @@ namespace Application.Handlers.Donuts
     /// Manjador de actualización de dona
     /// </summary>
     /// <param name="dbContext">Servicio de base de datos</param>
-    public class UpdateDonutHandler(AppDbContext dbContext) : IRequestHandler<UpdateDonutCommand>
+    public class UpdateDonutHandler(AppDbContext dbContext,ILogger<UpdateDonutHandler> logger) : IRequestHandler<UpdateDonutCommand>
     {
         private readonly AppDbContext _dbContext = dbContext;
+        private readonly ILogger<UpdateDonutHandler> _logger = logger;
 
         public async Task<Result> Handle(UpdateDonutCommand request, CancellationToken cancellationToken)
         {
@@ -26,6 +28,7 @@ namespace Application.Handlers.Donuts
             donut.Description = request.Description;
             donut.Price = request.Price;
             await _dbContext.SaveChangesAsync(cancellationToken);
+            _logger.LogInformation("Dona {Id} actualizada", donut.Id);
             return Result.Success();
         }
     }

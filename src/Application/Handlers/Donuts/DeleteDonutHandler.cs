@@ -2,6 +2,7 @@
 using Application.Commands;
 using Application.Models;
 using Domain.Entities;
+using Microsoft.Extensions.Logging;
 using Services;
 using System.Net;
 
@@ -11,9 +12,11 @@ namespace Application.Handlers.Donuts
     /// Manejador de eliminación de dona
     /// </summary>
     /// <param name="dbContext">Servicio de base de datos</param>
-    public class DeleteDonutHandler(AppDbContext dbContext) : IRequestHandler<DeleteCommand<int, Donut>>
+    /// <param name="logger">Servicio de logs</param>
+    public class DeleteDonutHandler(AppDbContext dbContext, ILogger<DeleteDonutHandler> logger) : IRequestHandler<DeleteCommand<int, Donut>>
     {
         private readonly AppDbContext _dbContext = dbContext;
+        private readonly ILogger<DeleteDonutHandler> _logger = logger;
 
         public async Task<Result> Handle(DeleteCommand<int, Donut> request, CancellationToken cancellationToken)
         {
@@ -25,6 +28,7 @@ namespace Application.Handlers.Donuts
 
             _dbContext.Donuts.Remove(donut);
             await _dbContext.SaveChangesAsync(cancellationToken);
+            _logger.LogInformation("Dona {Id} eliminada", donut.Id);
             return Result.Success();
         }
     }
