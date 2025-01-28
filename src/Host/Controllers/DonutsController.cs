@@ -37,5 +37,14 @@ namespace Host.Controllers
             var result = await Mediator.Send(new FindQuery<int, DonutDTO>(id));
             return BuildResponse(result);
         }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> Update(int id, UpdateDonutCommand command)
+        {
+            command.Id = id;
+            var result = await Mediator.Send(command);
+            return BuildResponse(result);
+        }
     }
 }
