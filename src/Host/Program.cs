@@ -1,4 +1,5 @@
 using Application;
+using Host.Middlewares;
 using Infrastructure;
 using NLog;
 using NLog.Web;
@@ -32,6 +33,8 @@ try
     }
 
     app.UseHttpsRedirection();
+
+    app.UseMiddleware<ExceptionMiddleware>();
 
     app.UseAuthorization();
 
