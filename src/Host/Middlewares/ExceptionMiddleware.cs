@@ -5,6 +5,10 @@ using System.Text.Json;
 
 namespace Host.Middlewares
 {
+    /// <summary>
+    /// Middleware de manejo de excepciones
+    /// </summary>
+    /// <param name="next"></param>
     public class ExceptionMiddleware(RequestDelegate next)
     {
         private readonly RequestDelegate _next = next;
