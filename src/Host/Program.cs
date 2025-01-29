@@ -45,6 +45,7 @@ try
 
     app.Run();
 }
+catch (HostAbortedException) { }
 catch (Exception ex)
 {
     logger.Error(ex, "Programa detenido por excepción");
@@ -54,3 +55,5 @@ finally
 {
     LogManager.Shutdown();
 }
+
+public partial class Program { }
