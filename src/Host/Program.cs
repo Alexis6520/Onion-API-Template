@@ -1,8 +1,10 @@
 using Application;
 using Host.Middlewares;
 using Infrastructure;
+using Microsoft.OpenApi.Models;
 using NLog;
 using NLog.Web;
+using System.Reflection;
 
 var logger = LogManager.GetCurrentClassLogger();
 
@@ -21,7 +23,19 @@ try
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+
+    builder.Services.AddSwaggerGen(options =>
+    {
+        options.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Version = "v1",
+            Title = "Onion API Template",
+            Description = "Plantilla de API Web con arquitectura cebolla"
+        });
+
+        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    });
 
     var app = builder.Build();
 
