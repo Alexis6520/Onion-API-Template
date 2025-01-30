@@ -8,7 +8,7 @@ namespace IntegrationTests.Abstractions
     /// Clase base para todas las pruebas
     /// </summary>
     /// <param name="factory">Fabrica de aplicación web personalizada</param>
-    public abstract class BaseTest(CustomWebAppFactory factory) : IDisposable
+    public abstract class BaseTest(CustomWebAppFactory factory) : IClassFixture<CustomWebAppFactory>, IDisposable
     {
         protected readonly CustomWebAppFactory Factory = factory;
         private HttpClient _client;
@@ -33,6 +33,9 @@ namespace IntegrationTests.Abstractions
             }
         }
 
+        /// <summary>
+        /// Sobreescribe este método para limpiar después de cada método de prueba
+        /// </summary>
         protected virtual void Cleanup()
         {
         }
