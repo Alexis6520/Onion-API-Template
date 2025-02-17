@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Services
+namespace Domain.Services
 {
     /// <summary>
     /// Servicio de base de datos

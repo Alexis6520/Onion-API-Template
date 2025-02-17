@@ -1,6 +1,6 @@
-﻿using IntegrationTests.Services;
+﻿using Domain.Services;
+using IntegrationTests.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Services;
 
 namespace IntegrationTests.Abstractions
 {
