@@ -20,7 +20,7 @@ namespace Application.Handlers.Donuts
 
         public async Task<Result> Handle(DeleteCommand<int, Donut> request, CancellationToken cancellationToken)
         {
-            var donut = await _dbContext.Donuts
+            Donut? donut = await _dbContext.Donuts
                 .FindAsync([request.Key], cancellationToken);
 
             if (donut == null)

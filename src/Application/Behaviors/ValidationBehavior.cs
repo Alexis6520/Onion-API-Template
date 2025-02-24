@@ -1,5 +1,6 @@
 ﻿using Application.Models;
 using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 using System.Net;
 
@@ -12,7 +13,7 @@ namespace Application.Behaviors
     /// <typeparam name="TResponse">Tipo de respuesta</typeparam>
     /// <param name="validators">Validadores de solicitud</param>
     public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators) :
-        IPipelineBehavior<TRequest, TResponse> where TResponse : Result
+        IPipelineBehavior<TRequest, TResponse> where TResponse : Result where TRequest : notnull
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators = validators;
 
@@ -21,8 +22,8 @@ namespace Application.Behaviors
             if (_validators.Any())
             {
                 var validationContext = new ValidationContext<TRequest>(request);
-                var results = await Task.WhenAll(_validators.Select(x => x.ValidateAsync(validationContext)));
-                var fails = results.Where(x => !x.IsValid).SelectMany(x => x.Errors);
+                ValidationResult[] results = await Task.WhenAll(_validators.Select(x => x.ValidateAsync(validationContext)));
+                IEnumerable<ValidationFailure> fails = results.Where(x => !x.IsValid).SelectMany(x => x.Errors);
 
                 if (fails.Any())
                 {

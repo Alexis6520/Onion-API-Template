@@ -39,6 +39,7 @@ namespace IntegrationTests
             var result = await response.Content
                 .ReadFromJsonAsync<Result<int>>();
 
+            Assert.NotNull(result);
             _toDeleteIds.Add(result.Value);
             return result.Value;
         }
@@ -59,6 +60,7 @@ namespace IntegrationTests
             }
 
             var result = await Client.GetFromJsonAsync<Result<List<DonutListItem>>>(BaseUrl);
+            Assert.NotNull(result?.Value);
             Assert.True(result.Value.Count >= 3);
         }
 
@@ -74,7 +76,7 @@ namespace IntegrationTests
 
             var id = await CreateDonutAsync(command);
             var result = await Client.GetFromJsonAsync<Result<DonutDTO>>($"{BaseUrl}/{id}");
-            Assert.NotNull(result.Value);
+            Assert.NotNull(result?.Value);
         }
 
         [Fact]
@@ -102,6 +104,7 @@ namespace IntegrationTests
             var donut = await DbContext.Donuts
                 .FindAsync([id]);
 
+            Assert.NotNull(donut);
             Assert.Equal(donut.Name, updateCommand.Name);
             Assert.NotEqual(donut.Name, createCommand.Name);
         }
