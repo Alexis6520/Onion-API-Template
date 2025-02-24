@@ -37,7 +37,7 @@ namespace Application.Handlers.Donuts
 
         public async Task<Result<DonutDTO>> Handle(FindQuery<int, DonutDTO> request, CancellationToken cancellationToken)
         {
-            var donut = await _dbContext.Donuts
+            DonutDTO? donut = await _dbContext.Donuts
                 .Where(x => x.Id == request.Key)
                 .Select(x => new DonutDTO
                 {

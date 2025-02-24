@@ -12,6 +12,7 @@ namespace Domain.Services
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configuramos las entidades para la implementación actual de este servicio
             var contextType = GetType();
             var configNamespace = $"{contextType.Namespace}.Configuration";
 

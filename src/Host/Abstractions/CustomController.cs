@@ -14,7 +14,7 @@ namespace Host.Abstractions
     {
         protected IMediator Mediator => mediator;
 
-        protected ObjectResult BuildResponse(Result result)
+        protected IActionResult BuildResponse(Result result)
         {
             var statusCode = (int)result.StatusCode;
 
@@ -24,7 +24,7 @@ namespace Host.Abstractions
             return StatusCode(statusCode, null);
         }
 
-        protected ObjectResult BuildResponse<TValue>(Result<TValue> result)
+        protected IActionResult BuildResponse<TValue>(Result<TValue> result)
         {
             return StatusCode((int)result.StatusCode, result);
         }

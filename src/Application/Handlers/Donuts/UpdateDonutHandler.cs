@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions;
 using Application.Commands.Donuts;
 using Application.Models;
+using Domain.Entities;
 using Domain.Services;
 using Microsoft.Extensions.Logging;
 using System.Net;
@@ -18,7 +19,7 @@ namespace Application.Handlers.Donuts
 
         public async Task<Result> Handle(UpdateDonutCommand request, CancellationToken cancellationToken)
         {
-            var donut = await _dbContext.Donuts
+            Donut? donut = await _dbContext.Donuts
                 .FindAsync([request.Id], cancellationToken);
 
             if (donut == null)
