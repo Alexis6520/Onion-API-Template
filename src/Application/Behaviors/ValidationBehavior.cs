@@ -12,7 +12,7 @@ namespace Application.Behaviors
     /// <typeparam name="TResponse">Tipo de respuesta</typeparam>
     /// <param name="validators">Validadores de solicitud</param>
     public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators) :
-        IPipelineBehavior<TRequest, TResponse> where TResponse : Result
+        IPipelineBehavior<TRequest, TResponse> where TResponse : Result where TRequest : notnull
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators = validators;
 
@@ -29,7 +29,7 @@ namespace Application.Behaviors
                     var result = Activator.CreateInstance<TResponse>();
                     result.Succeeded = false;
                     result.StatusCode = HttpStatusCode.BadRequest;
-                    result.Errors = fails.Select(x => x.ErrorMessage).ToList();
+                    result.Errors = [.. fails.Select(x => x.ErrorMessage)];
                     return result;
                 }
             }

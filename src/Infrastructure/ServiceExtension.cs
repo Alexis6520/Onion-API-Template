@@ -1,6 +1,6 @@
 ﻿using Infrastructure.EFCore.SqlServer;
 using Microsoft.Extensions.DependencyInjection;
-using Services;
+using Domain.Services;
 
 namespace Infrastructure
 {
