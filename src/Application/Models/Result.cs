@@ -15,7 +15,7 @@ namespace Application.Models
         public HttpStatusCode StatusCode { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public IEnumerable<string>? Errors { get; set; }
+        public IEnumerable<string> Errors { get; set; }
 
         public static Result Success(HttpStatusCode statusCode = HttpStatusCode.NoContent)
         {
@@ -54,7 +54,7 @@ namespace Application.Models
     public class Result<TValue> : Result
     {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public TValue? Value { get; set; }
+        public TValue Value { get; set; }
 
         public static Result<TValue> Success(TValue value, HttpStatusCode statusCode = HttpStatusCode.OK)
         {

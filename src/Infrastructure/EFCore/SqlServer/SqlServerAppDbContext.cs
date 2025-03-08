@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Domain.Services;
+using Services;
 
 namespace Infrastructure.EFCore.SqlServer
 {

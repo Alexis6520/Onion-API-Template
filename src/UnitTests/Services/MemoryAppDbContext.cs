@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Domain.Services;
+using Services;
 
 namespace UnitTests.Services
 {
