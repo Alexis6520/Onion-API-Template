@@ -1,6 +1,6 @@
-﻿using IntegrationTests.Services;
+﻿using Domain.Services;
+using IntegrationTests.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Services;
 
 namespace IntegrationTests.Abstractions
 {
@@ -11,9 +11,9 @@ namespace IntegrationTests.Abstractions
     public abstract class BaseTest(CustomWebAppFactory factory) : IClassFixture<CustomWebAppFactory>, IDisposable
     {
         protected readonly CustomWebAppFactory Factory = factory;
-        private HttpClient _client;
-        private IServiceScope _scope;
-        private AppDbContext _dbContext;
+        private HttpClient? _client;
+        private IServiceScope? _scope;
+        private AppDbContext? _dbContext;
 
         public HttpClient Client => _client ??= Factory.CreateClient();
 

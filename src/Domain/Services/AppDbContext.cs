@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Services
+namespace Domain.Services
 {
     /// <summary>
     /// Servicio de base de datos
@@ -12,6 +12,7 @@ namespace Services
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configuramos las entidades para la implementación actual de este servicio
             var contextType = GetType();
             var configNamespace = $"{contextType.Namespace}.Configuration";
 

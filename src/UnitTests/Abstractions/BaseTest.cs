@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Domain.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
-using Services;
 using UnitTests.Services;
 
 namespace UnitTests.Abstractions
@@ -11,8 +11,8 @@ namespace UnitTests.Abstractions
     /// <typeparam name="THandler"></typeparam>
     public abstract class BaseTest<THandler>
     {
-        private AppDbContext _dbContext;
-        private ILogger<THandler> _logger;
+        private AppDbContext? _dbContext;
+        private ILogger<THandler>? _logger;
 
         public AppDbContext DbContext => _dbContext ??= new MemoryAppDbContext(typeof(THandler).Name);
         public ILogger<THandler> Logger => _logger ??= new Mock<ILogger<THandler>>().Object;

@@ -2,8 +2,8 @@
 using Application.Commands;
 using Application.Models;
 using Domain.Entities;
+using Domain.Services;
 using Microsoft.Extensions.Logging;
-using Services;
 using System.Net;
 
 namespace Application.Handlers.Donuts
@@ -20,7 +20,7 @@ namespace Application.Handlers.Donuts
 
         public async Task<Result> Handle(DeleteCommand<int, Donut> request, CancellationToken cancellationToken)
         {
-            var donut = await _dbContext.Donuts
+            Donut? donut = await _dbContext.Donuts
                 .FindAsync([request.Key], cancellationToken);
 
             if (donut == null)
