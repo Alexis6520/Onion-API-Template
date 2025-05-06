@@ -20,9 +20,9 @@ namespace Host.Controllers
             return StatusCode((int)result.StatusCode, body);
         }
 
-        protected ObjectResult BuildResponse<T>(T value, int statusCode)
+        protected ObjectResult BuildResponse<T>(T value, int statusCode = StatusCodes.Status200OK)
         {
-            return StatusCode(statusCode, value);
+            return StatusCode(statusCode, Result<T>.Success(value));
         }
     }
 }

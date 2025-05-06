@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
-namespace Application.Handlers
+namespace Application.Handlers.Donuts
 {
     public class CreateDonutHandler(AppDbContext dbContext) : IRequestHandler<CreateDonutCommand, Result<int>>
     {
