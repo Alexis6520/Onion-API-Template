@@ -13,6 +13,7 @@ namespace Host.Controllers
         [HttpPost]
         [ProducesResponseType<Result<int>>(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] CreateDonutCommand command)
         {
             return BuildResponse(await Mediator.Send(command));

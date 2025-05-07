@@ -8,7 +8,7 @@ namespace Application.RP
     /// dentro del proceso de negocio.
     /// </summary>
     /// <typeparam name="T">Tipo de valor devuelto</typeparam>
-    public class Result<T>
+    public class Result<T> : IResult
     {
         private Result() { }
 
