@@ -10,8 +10,6 @@ namespace Application.RP
     /// <typeparam name="T">Tipo de valor devuelto</typeparam>
     public class Result<T> : IResult
     {
-        private Result() { }
-
         [JsonIgnore]
         public bool Succeeded => Errors is null || !Errors.Any();
 

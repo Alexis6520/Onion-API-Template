@@ -20,7 +20,7 @@ namespace Application.Behaviors
 
                 if (errors.Length > 0)
                 {
-                    var result = (TResponse?)Activator.CreateInstance(typeof(TResponse), true);
+                    var result = (TResponse?)Activator.CreateInstance(typeof(TResponse));
                     _ = result ?? throw new Exception("No se pudo crear una instancia del resultado");
                     result.StatusCode = HttpStatusCode.BadRequest;
                     result.Errors = errors;
